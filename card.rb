@@ -16,10 +16,18 @@ class Card
   end
 
   def short_name
-    @rank.slice(0).capitalize + @suit.slice(0)
+    (face_card? || ace? ? @rank.slice(0).capitalize : @value.to_s) + @suit.slice(0)
   end
 
   def flip
     @orientation = @orientation == :face_down ? :face_up : :face_down
+  end
+
+  def face_card?
+    return [:jack, :queen, :king].include?(@rank)
+  end
+
+  def ace?
+    return @rank == :ace
   end
 end
